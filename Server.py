@@ -3,7 +3,7 @@ from threading import Thread
 from socketserver import ThreadingMixIn
 
 TCP_IP = 'localhost'
-TCP_PORT = 9001
+TCP_PORT = 12021
 BUFFER_SIZE = 1024
 
 class ClientThread(Thread):
@@ -34,6 +34,13 @@ tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpsock.bind((TCP_IP, TCP_PORT))
 threads = []
 
+msg = socket.gethostbyname(socket.gethostname())
+dest = ("192.168.43.255",10100)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+s.sendto(msg.encode(), dest)
+print("Looking for replies; press Ctrl-C to stop.")
+
 while True:
     tcpsock.listen(5)
     print("Waiting for incoming connections...")
@@ -42,6 +49,12 @@ while True:
     newthread = ClientThread(ip,port,conn)
     newthread.start()
     threads.append(newthread)
+
+    # try
+    (buf,address)=s.recvfrom(10100)
+    if not len(buf):
+        break
+    print("received from %s: %s" %(address, buf))
 
 for t in threads:
     t.join()
