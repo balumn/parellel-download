@@ -1,25 +1,39 @@
-import tkinter as tk
+from tkinter import *
 
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.pack()
-        self.create_widgets()
+def donothing():
+   filewin = Toplevel(root)
+   button = Button(filewin, text="Do nothing button")
+   button.pack()
+   
+root = Tk()
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="New", command=donothing)
+filemenu.add_command(label="Open", command=donothing)
+filemenu.add_command(label="Save", command=donothing)
+filemenu.add_command(label="Save as...", command=donothing)
+filemenu.add_command(label="Close", command=donothing)
 
-    def create_widgets(self):
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
+filemenu.add_separator()
 
-        self.quit = tk.Button(self, text="QUIT", fg="red",
-                              command=self.master.destroy)
-        self.quit.pack(side="bottom")
+filemenu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=filemenu)
+editmenu = Menu(menubar, tearoff=0)
+editmenu.add_command(label="Undo", command=donothing)
 
-    def say_hi(self):
-        print("hi there, everyone!")
+editmenu.add_separator()
 
-root = tk.Tk()
-app = Application(master=root)
-app.mainloop()
+editmenu.add_command(label="Cut", command=donothing)
+editmenu.add_command(label="Copy", command=donothing)
+editmenu.add_command(label="Paste", command=donothing)
+editmenu.add_command(label="Delete", command=donothing)
+editmenu.add_command(label="Select All", command=donothing)
+
+menubar.add_cascade(label="Edit", menu=editmenu)
+helpmenu = Menu(menubar, tearoff=0)
+helpmenu.add_command(label="Help Index", command=donothing)
+helpmenu.add_command(label="About...", command=donothing)
+menubar.add_cascade(label="Help", menu=helpmenu)
+
+root.config(menu=menubar)
+root.mainloop()
