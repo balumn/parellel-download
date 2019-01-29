@@ -2,23 +2,27 @@
 import tkinter as tk # this is for python3
 
 class Application(tk.Frame):
-    def say_hi(self):
+    def master_function(self):               #enter code to trigger master mode
         print("hi there, everyone!")
+
+    def client_function(self):               #enter code to trigger client mode
+        print("hi there, everyone!")
+
 
     def createWidgets(self):
         self.QUIT = tk.Button(self)
 
         # master button
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "MASTER",
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack({"side": "left"})
+        self.master = tk.Button(self)
+        self.master["text"] = "MASTER",
+        self.master["command"] = self.master_function
+        self.master.pack({"side": "left"})
 
         # Client button
-        self.hi_there = tk.Button(self)
-        self.hi_there["text"] = "CLIENT",
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack({"side": "left"})
+        self.client = tk.Button(self)
+        self.client["text"] = "CLIENT",
+        self.client["command"] = self.client_function
+        self.client.pack({"side": "left"})
         
         # Quit 
         self.QUIT["text"] = "QUIT"
@@ -34,10 +38,11 @@ class Application(tk.Frame):
 
 root = tk.Tk()
 app = Application(master=root)
-# menu here
 
-def broadcast_hello():
-    print("hello!")
+def display_about(self):                      #enter about details here
+    print("Add about here");
+
+# menu here
 menu = tk.Menu(root)
 root.config(menu=menu)
 filemenu = tk.Menu(menu)
@@ -48,6 +53,6 @@ filemenu.add_command(label="Exit", command=root.quit)
 
 helpmenu = tk.Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
-helpmenu.add_command(label="About...", command=broadcast_hello)
+helpmenu.add_command(label="About...", command=display_about)
 app.mainloop()
 root.destroy()
