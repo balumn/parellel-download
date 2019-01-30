@@ -1,9 +1,12 @@
 
 import tkinter as tk # this is for python3
+import TCPMaster
 
 class Application(tk.Frame):
     def master_function(self):               #enter code to trigger master mode
         print("hi there, everyone!")
+        mas=TCPMaster.broadCast()
+        mas.call()
 
     def client_function(self):               #enter code to trigger client mode
         print("hi there, everyone!")
