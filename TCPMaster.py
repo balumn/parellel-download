@@ -1,7 +1,7 @@
 import socket
 from threading import Thread
 from socketserver import ThreadingMixIn
-# import listen
+import listen
 
 TCP_IP = 'localhost'
 TCP_PORT = 12021
@@ -55,20 +55,9 @@ class broadCast:
             # (buf,address)=s.recvfrom(10100)
             # if not len(buf):
             #     break
-            TCP_IP = ''
-            TCP_PORT = 10100
-            BUFFER_SIZE = 1024
-
-            tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            tcpsock.bind((TCP_IP, TCP_PORT))
-            while True:
-                tcpsock.listen(5)
-                print ("Waiting for incoming connections...")
-                (conn, (ip,port)) = tcpsock.accept()
-                conn.recv(1024)
-                print ('Got connection from ', (ip,port))
-                # print("received from %s: %s" %(address, buf))
+            lis=listen.Listen()
+            lis.start()
+            # print("received from %s: %s" %(address, buf))
         s.close()
 
         

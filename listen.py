@@ -3,7 +3,7 @@ import socket
 class Listen:
     def start():
         TCP_IP = ''
-        TCP_PORT = 10100
+        TCP_PORT = 9001
         BUFFER_SIZE = 1024
 
         tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,5 +13,4 @@ class Listen:
             tcpsock.listen(5)
             print ("Waiting for incoming connections...")
             (conn, (ip,port)) = tcpsock.accept()
-            conn.recv(1024)
             print ('Got connection from ', (ip,port))
