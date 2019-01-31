@@ -15,10 +15,10 @@ while 1:
     try:
         message, address = s.recvfrom(10104)
         print("Got data from", address)
-        ss=sendmsg.SendMsg()
-        ss.send(address)
     except (KeyboardInterrupt, SystemExit):      
         raise
     except:
         traceback.print_exc()
-s.close()
+s.close()        
+ss=sendmsg.SendMsg()
+ss.send(address)
