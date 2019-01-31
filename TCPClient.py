@@ -13,21 +13,7 @@ while 1:
     try:
         message, address = s.recvfrom(10104)
         print("Got data from", address)
-        ad = ''.join(str(address))
-        ad1 = ad.split()
-        ad2= ad1[0]
-        ad3=ad2[2:15]
-        print(ad3) #ad3 is ip address of master
-
-        #replying to server
-        dest = (ad3,10100)
-        msg = "my speed is xxxx"
-        # s.sendto(msg.encode(), dest)
-
-
-        f = open('serverlist.txt', 'a')
-        f.write(ad3+'\n')
-        f.close()        
+       
     except (KeyboardInterrupt, SystemExit):
         
         raise

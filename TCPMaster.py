@@ -31,7 +31,7 @@ class ClientThread(Thread):
 
 class broadCast:
     def call(self):
-        TCP_IP = 'localhost'
+        TCP_IP = ''
         TCP_PORT = 12021
         BUFFER_SIZE = 1024
         tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -39,13 +39,14 @@ class broadCast:
         tcpsock.bind((TCP_IP, TCP_PORT))
         threads = []  
         msg = socket.gethostbyname(socket.gethostname())
-        dest = ("192.168.43.255",10100)
+        dest = ('localhost',10100)
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         s.sendto(msg.encode(), dest)
         print("Looking for replies; press Ctrl-C to stop.")
+        s.close()
         while True:
-            tcpsock.listen(2)
+            tcpsock.listen(1)
             print("Waiting for incoming connections...")
             (conn, (ip,port)) = tcpsock.accept()
             print('Got connection from ', (ip,port))

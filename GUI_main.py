@@ -4,7 +4,7 @@ import TCPMaster
 
 class Application(tk.Frame):
     def master_function(self):               #enter code to trigger master mode
-        print("hi there, everyone!")
+        #print("hi there, everyone!")
         mas=TCPMaster.broadCast()
         mas.call()
 
