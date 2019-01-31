@@ -58,9 +58,6 @@ class broadCast:
             lis=listen.Listen()
             lis.start()
             # print("received from %s: %s" %(address, buf))
-    
-
-        for t in threads:
-            t.join()
-
         s.close()
+
+        
