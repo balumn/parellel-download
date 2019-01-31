@@ -3,6 +3,8 @@
 import socket
 import traceback
 import os
+import sendmsg
+
 host = ''
 port = 10100
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -13,9 +15,10 @@ while 1:
     try:
         message, address = s.recvfrom(10104)
         print("Got data from", address)
-       
-    except (KeyboardInterrupt, SystemExit):
-        
+    except (KeyboardInterrupt, SystemExit):      
         raise
     except:
         traceback.print_exc()
+s.close()        
+ss=sendmsg.SendMsg()
+ss.send(address)

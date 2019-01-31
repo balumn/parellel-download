@@ -1,6 +1,7 @@
 import socket
 from threading import Thread
 from socketserver import ThreadingMixIn
+import listen
 
 TCP_IP = 'localhost'
 TCP_PORT = 12021
@@ -44,22 +45,22 @@ class broadCast:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         s.sendto(msg.encode(), dest)
         print("Looking for replies; press Ctrl-C to stop.")
-        s.close()
         while True:
-            tcpsock.listen(1)
-            print("Waiting for incoming connections...")
-            (conn, (ip,port)) = tcpsock.accept()
-            print('Got connection from ', (ip,port))
-            newthread = ClientThread(ip,port,conn)
-            newthread.start()
-            threads.append(newthread)
+
+            # newthread = ClientThread(ip,port,conn)
+            # newthread.start()
+            # threads.append(newthread)
 
             # try
-            (buf,address)=s.recvfrom(10100)
-            if not len(buf):
-                break
-            print("received from %s: %s" %(address, buf))
+            # (buf,address)=s.recvfrom(10100)
+            # if not len(buf):
+            #     break
+            lis=listen.Listen()
+            lis.start()
+            # print("received from %s: %s" %(address, buf))
     
 
         for t in threads:
             t.join()
+
+        s.close()
