@@ -12,4 +12,6 @@ while True:
     tcpsock.listen(5)
     print ("Waiting for incoming connections...")
     (conn, (ip,port)) = tcpsock.accept()
+    msg=conn.recv(BUFFER_SIZE)
     print ('Got connection from ', (ip,port))
+    print(msg)
