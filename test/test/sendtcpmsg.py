@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import socket
+import urllib.request
+import urllib.response
+import os
 
 def send_tcp_message(tcpaddress):
         TCP_IP = tcpaddress
@@ -20,9 +23,12 @@ def send_tcp_message(tcpaddress):
 
         #download starts here
 
-        a=byte                                                              #check if recived as string NOT byte
+        a=byte  #this variable might by named x as param to range                                                             #check if recived as string NOT byte
         req = urllib.request.Request(url, headers={'Range':x})
         data = urllib.request.urlopen(req).read()
-        print(data)
 
-       #s.close()
+        #@TODO assign directory path for download
+
+        print(data)                                                        
+
+        #s.close()
