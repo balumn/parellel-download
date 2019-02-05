@@ -17,12 +17,10 @@ class MasterThread(Thread):
 
     def run(self):
          print("hello")
-         s=socket.socket()
-         s=self.sock
          msg="hello client "+str(self.sequence)
-         print(type(self.sock))
-         s.send(msg.encode())
-         print(type(self.url))
+        # print(type(self.sock))
+         #self.sock.send(msg.encode())
+         print(self.url)
          self.sock.send(self.url.encode())
-         print(type(self.byte))
+         print(self.byte)
          self.sock.send(self.byte.encode())
