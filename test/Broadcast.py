@@ -23,6 +23,6 @@ def broadcast_send():
         timeout = 20   # [seconds]
         timeout_start = time.time()
         while time.time() < timeout_start + timeout:
-            server.sendto(message, ('192.168.1.7', 37020))
+            server.sendto(message, ('<broadcast>', 37020))
             print("message sent!")
             time.sleep(1)

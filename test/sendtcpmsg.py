@@ -23,7 +23,7 @@ def send_tcp_message(tcpaddress):
 
         #download starts here
 
-        a=byte  #this variable might by named x as param to range                                                             #check if recived as string NOT byte
+        x=byte  #this variable might by named x as param to range                                                             #check if recived as string NOT byte
         req = urllib.request.Request(url, headers={'Range':x})
         data = urllib.request.urlopen(req).read()
 

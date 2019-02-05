@@ -22,11 +22,14 @@ def recive_tcp_message():
             print(msg)
             sequence = sequence+1
             print('Got connection from ', (ip,port))
-            list_of_param = (ip,port,conn,sequence)
+            list_of_param = [ip,port,conn,sequence]
+            break
             
-
+        for i in list_of_param:
+            print(i)
         #code to pass url here
         #@TODO get url from user
+        url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
         client_url=Start_split(url,sequence)
         #starting threads
         for i in range(sequence) :

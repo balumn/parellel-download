@@ -13,11 +13,16 @@ class MasterThread(Thread):
         self.sequence = param[3]
         self.url = url[0]
         self.byte = url[1]
-        print(" New thread started for "+ip+":"+str(port))
+        print(" New thread started for "+self.ip+":"+str(self.port))
 
     def run(self):
          print("hello")
+         s=socket.socket()
+         s=self.sock
          msg="hello client "+str(self.sequence)
-         self.sock.send(msg.encode())
+         print(type(self.sock))
+         s.send(msg.encode())
+         print(type(self.url))
          self.sock.send(self.url.encode())
+         print(type(self.byte))
          self.sock.send(self.byte.encode())
