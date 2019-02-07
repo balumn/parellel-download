@@ -3,7 +3,6 @@ import socket
 
 
 class MasterThread(Thread):
-    
 
     def __init__(self,param,url): #recives a tuple param from listofparam and a list clientlist
         Thread.__init__(self)

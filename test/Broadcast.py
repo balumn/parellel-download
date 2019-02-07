@@ -12,7 +12,7 @@ def broadcast_recive():
             data, addr = client.recvfrom(1024)
             print("received message: %s"%data)
             print("recived from :",addr)
-            break;
+            break
         return addr
 def broadcast_send():
         rtm=recive_tcp_message()

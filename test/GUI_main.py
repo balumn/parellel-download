@@ -1,15 +1,18 @@
 
 import tkinter as tk # this is for python3
-import TCPMaster
+import smaster
+import sclient
+# import TCPMaster
 
 class Application(tk.Frame):
     def master_function(self):               #enter code to trigger master mode
         print("hi there, everyone!")
-        mas=TCPMaster.broadCast()
-        mas.call()
+        smaster.call()
 
     def client_function(self):               #enter code to trigger client mode
-        print("hi there, everyone!")
+        #print("hi there, everyone!")
+        (address, tcpaddress) = sclient.call()
+        print(address," , ",tcpaddress)
 
 
     def createWidgets(self):
@@ -17,7 +20,9 @@ class Application(tk.Frame):
 
         # master button
         self.master = tk.Button(self)
+        self.master.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         self.master["text"] = "MASTER",
+        self.master["width"] = 25
         self.master["command"] = self.master_function
         self.master.pack({"side": "left"})
 
@@ -39,7 +44,10 @@ class Application(tk.Frame):
         self.pack()
         self.createWidgets()
 
+#App
 root = tk.Tk()
+root.title("Version 0.1")
+root.geometry("500x100")
 app = Application(master=root)
 
 def display_about(self):                      #enter about details here
