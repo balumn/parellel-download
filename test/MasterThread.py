@@ -16,6 +16,7 @@ class MasterThread(Thread):
         print(" New thread started for "+self.ip+":"+str(self.port))
 
     def run(self):
+         read_list = [self.sock]   
          print("hello")
          msg="hello client "+str(self.sequence)
         # print(type(self.sock))
@@ -24,3 +25,13 @@ class MasterThread(Thread):
          self.sock.send(self.url.encode())
          print(self.byte)
          self.sock.send(self.byte.encode())
+         readable, writable, errored = select.select(read_list, [], [])
+         for s in readable:
+             if s is self.sock:
+                      
+                    part=self.sock.recv(2048)
+                    downloadpath="C:\Users\KINDY kuttan\Desktop\test"
+                    f=open(downloadpath,wb)
+                    f.write(data) 
+                    f.close()
+                    #print(part)

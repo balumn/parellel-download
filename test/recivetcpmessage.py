@@ -35,13 +35,16 @@ class recive_tcp_message:
                 print(i)
             #code to pass url here
             #@TODO get url from user
-            url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
+            #url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
+            url='https://a.tumblr.com/tumblr_mf1w5572Hm1rqcxjao1_r1.mp3'
             client_url=Start_split(url,self.sequence)
             #starting threads
             for i in range(self.sequence) :
                 newthread = MasterThread(self.list_of_param[i],client_url[i])
                 newthread.start()
                 self.threads.append(newthread)
-        
+            #for t in self.threads:
+                
+
             for t in self.threads:
                 t.join()
