@@ -1,6 +1,7 @@
 from threading import Thread
 import socket
-
+import os
+import select
 
 class MasterThread(Thread):
     
@@ -30,7 +31,12 @@ class MasterThread(Thread):
              if s is self.sock:
                       
                     part=self.sock.recv(2048)
-                    downloadpath="C:\Users\KINDY kuttan\Desktop\test"
+                    download = "/download/"
+                    directory=os.path.dirname(download)
+                    if not os.path.exists(directory):
+                        os.mkdir(directory)
+                    downloadpath=directory
+                    #os.path.join(downloadpath,temp)
                     f=open(downloadpath,wb)
                     f.write(data) 
                     f.close()
