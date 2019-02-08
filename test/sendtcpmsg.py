@@ -33,8 +33,8 @@ def send_tcp_message(tcpaddress):
         directory=os.path.dirname(download)
         if not os.path.exists(directory):
             os.mkdir(directory)
-        downloadpath=directory
-        f=open(downloadpath,wb)
+        downloadpath=directory 
+        f=open(downloadpath,'wb')
         f.write(data) 
         f.close()
         f=open(downloadpath,rb)

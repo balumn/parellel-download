@@ -31,13 +31,13 @@ class MasterThread(Thread):
              if s is self.sock:
                       
                     part=self.sock.recv(2048)
-                    download = "/download/"
-                    directory=os.path.dirname(download)
-                    if not os.path.exists(directory):
-                        os.mkdir(directory)
-                    downloadpath=directory
-                    #os.path.join(downloadpath,temp)
-                    f=open(downloadpath,wb)
-                    f.write(data) 
+                   # download = "/download"
+                     #directory=os.path.dirname(download)
+                     #if not os.path.exists(directory):
+                       #  os.mkdir(directory)
+                     #downloadpath=directory
+                     #os.path.join(downloadpath,temp)
+                    f=open("downloadpath","wb")
+                    f.write(part) 
                     f.close()
-                    #print(part)
+                    print(part)
