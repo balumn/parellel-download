@@ -29,7 +29,11 @@ def send_tcp_message(tcpaddress):
         data = urllib.request.urlopen(req).read()
 
         #@TODO assign directory path for download
-        downloadpath="C:\Users\KINDY kuttan\Desktop\test"
+        file_path = "/download/"
+        directory = os.path.dirname(file_path)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        downloadpath = directory
         f=open(downloadpath,wb)
         f.write(data) 
         f.close()
