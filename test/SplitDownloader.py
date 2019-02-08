@@ -55,7 +55,7 @@ def Start_split(url,client_count):
 
 
 # USAGE of requests on client side
-# a='bytes=0-4967'
+# x='bytes=0-4967'
 # req = urllib.request.Request(url, headers={'Range':x})
 # data = urllib.request.urlopen(req).read()
 # print(data)
