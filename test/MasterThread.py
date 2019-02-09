@@ -47,7 +47,7 @@ class MasterThread(Thread):
                 part=recvall(self.sock)
                     #print(part)
                     
-                f=open("downloadpath"+self.sequence,"wb")
+                f=open("downloadpath","wb")
                 f.write(part) 
                 f.close()
                 print(part)
