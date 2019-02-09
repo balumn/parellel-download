@@ -25,7 +25,7 @@ def broadcast_send():
         # indefinitely when trying to receive data.
         server.settimeout(0.02)
         server.bind(("", 44444))
-        message = b"your very important message"
+        message = b"broadcast from server"
         timeout = 20   # [seconds]
         timeout_start = time.time()
         while time.time() < timeout_start + timeout:
