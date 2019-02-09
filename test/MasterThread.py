@@ -15,7 +15,7 @@ class MasterThread(Thread):
         self.url = url[0]
         self.byte = url[1]
         print(" New thread started for "+self.ip+":"+str(self.port))
-
+      
     def run(self):
          read_list = [self.sock]   
          print("hello")
@@ -26,18 +26,28 @@ class MasterThread(Thread):
          self.sock.send(self.url.encode())
          print(self.byte)
          self.sock.send(self.byte.encode())
-         readable, writable, errored = select.select(read_list, [], [])
+         
+         def recvall(sock):
+            BUFF_SIZE = 4096 # 4 KiB
+            data = b''
+            while True:
+                part = sock.recv(BUFF_SIZE)
+                data += part
+                if len(part) < BUFF_SIZE:
+                    # either 0 or end of data
+                    break
+            return data
+         readable, writable, errored = select.select(read_list, [], [])   
          for s in readable:
              if s is self.sock:
-                      
-                    part=self.sock.recv(2048)
-                   # download = "/download"
-                     #directory=os.path.dirname(download)
-                     #if not os.path.exists(directory):
-                       #  os.mkdir(directory)
-                     #downloadpath=directory
-                     #os.path.join(downloadpath,temp)
-                    f=open("downloadpath","wb")
-                    f.write(part) 
-                    f.close()
-                    print(part)
+
+
+
+                #while True:   
+                part=recvall(self.sock)
+                    #print(part)
+                    
+                f=open("downloadpath"+self.sequence,"wb")
+                f.write(part) 
+                f.close()
+                print(part)

@@ -28,10 +28,8 @@ def Start_split(url,client_count):
         print("Fileinfo ==>")
         print(response.info())
         strRes = str(response.info())
-        temp=[int(s) for s in strRes.split() if s.isdigit()]
-        print(temp)
-        contentlength=temp[4]
-
+        contentlength=int(response.getheader("Content-Length"))
+        
         print(" N-Division requests")
         print("\tNo. of clients:",client_count)
         print("\tFileSize in bytes:",contentlength)
@@ -55,7 +53,7 @@ def Start_split(url,client_count):
 
 
 # USAGE of requests on client side
-# x='bytes=0-4967'
+# a='bytes=0-4967'
 # req = urllib.request.Request(url, headers={'Range':x})
 # data = urllib.request.urlopen(req).read()
 # print(data)
