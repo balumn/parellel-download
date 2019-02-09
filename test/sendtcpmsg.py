@@ -4,6 +4,7 @@ import socket
 import urllib.request
 import urllib.response
 import os
+import select
 
 def send_tcp_message(tcpaddress):
         TCP_IP = tcpaddress
@@ -31,13 +32,25 @@ def send_tcp_message(tcpaddress):
         #@TODO assign directory path for download
 
         #@TODO path :https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
+        downloadFolder = "C://Users/DKP/Documents/GitHub/parellel-download"
+        downloadPath = downloadFolder + "/" + "new_file"
+        f=open(downloadPath,'wb')
+        data1=str(data)
         
-        f=open("downloadpath",'wb')
-        #for chunk in data.iter_content():   #verify if nessary
+        #for chunk in data1:   #verify if nessary
+        #        s.sendall(chunk.encode())
         f.write(data) 
         f.close()
-        f=open("downloadpath",'rb')
-        #send downloaded code back to master
-        s.sendfile(f)#try send all or loop send 
+        write_list=[s]
+        with open(downloadPath,'rb') as f:
+            #d=f.read(4096)
+            #while d:
+            #    s.send(d)
+            #    d=f.read(4096)
+            #    print(d)
+            readable, writable, errored = select.select([],write_list, [])   
+            for i in writable:
+                if i is s:
+                    s.sendfile(f)   
         s.close()
         print("file send :::")

@@ -32,8 +32,10 @@ class MasterThread(Thread):
             data = b''
             while True:
                 part = sock.recv(BUFF_SIZE)
+                #p1=part.decode()
                 data += part
-                if len(part) < BUFF_SIZE:
+                #if len(part) < BUFF_SIZE:
+                if not part:
                     # either 0 or end of data
                     break
             return data
