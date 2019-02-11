@@ -1,6 +1,8 @@
 import urllib.request
 import urllib.response
 import os
+import seekmer
+
 
 class HeadRequest(urllib.request.Request):
     def get_method(self):
@@ -33,6 +35,8 @@ def Start_split(url,client_count):
         print(" N-Division requests")
         print("\tNo. of clients:",client_count)
         print("\tFileSize in bytes:",contentlength)
+        seekmer.create(contentlength)
+        print("sample file of content length created")
         urlRangeList = n_division(client_count,contentlength)
         for a in urlRangeList:
             print(a)

@@ -4,6 +4,7 @@ from MasterThread import MasterThread
 from SplitDownloader import * 
 import select
 
+
 class recive_tcp_message:
         def __init__(self,):
             self.BUFFER_SIZE = 1024
@@ -48,3 +49,4 @@ class recive_tcp_message:
 
             for t in self.threads:
                 t.join()
+           # merge(self.sequence)

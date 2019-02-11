@@ -2,6 +2,7 @@ from threading import Thread
 import socket
 import os
 import select
+import seekmer
 
 class MasterThread(Thread):
     
@@ -47,9 +48,21 @@ class MasterThread(Thread):
 
                 #while True:   
                 part=recvall(self.sock)
+                #find offset
+                bt = str(self.byte)
+                temp=(bt.split('='))
+                temp1=(temp[1].split('-'))
+                temp2=temp1[0]
+                offset=int(temp2)
+
+                print("startng pos to write data:",offset)
+                seekmer.replace(offset,part)
+                
+
                     #print(part)
-                    
-                f=open("downloadpath","wb")
-                f.write(part) 
-                f.close()
-                print(part)
+                #downloadFolder = "C://Project/parellel-download"
+                #downloadPath = downloadFolder + "/" + "new_file"   
+                #f=open(downloadPath+str(self.sequence),"wb")
+                #f.write(part) 
+                #f.close()
+                #print(part)
