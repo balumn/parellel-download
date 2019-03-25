@@ -60,7 +60,9 @@ class MasterThread(Thread):
                 
 
                     #print(part)
-                downloadfolder = "c://project/parellel-download"
+                downloadFolder = "C://Project/parellel-download"
+                if not (os.path.isdir("C://Project/parellel-download")):
+                    os.makedirs("C://Project/parellel-download")
                 downloadpath = downloadfolder + "/" + "new_file"   
                 f=open(downloadpath+str(self.sequence),"wb")
                 print("data from client",self.sequence,"is received")

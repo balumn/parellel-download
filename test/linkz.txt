@@ -1,0 +1,8 @@
+https://dlcdnets.asus.com/pub/ASUS/nb/DriversForWin8/Bluetooth/Bluetooth_Atheros_Win8_64_Z800208.zip
+4 MBps 180 MB
+
+https://mirror.de.leaseweb.net/videolan/vlc/3.0.6/win64/vlc-3.0.6-win64.exe
+650 KBps 40 MB
+
+https://dlcdnets.asus.com/pub/ASUS/nb/DriversForWin8/Audio/Audio_Realtek_Win8_64_Z6016716.zip
+4 MBps 105 MB

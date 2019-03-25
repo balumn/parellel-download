@@ -39,7 +39,7 @@ class recive_tcp_message:
             #code to pass url here
             #@TODO get url from user
             #url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
-            url='http://s3.amazonaws.com/codesector-us/teracopy.exe'
+            url='https://dlcdnets.asus.com/pub/ASUS/nb/DriversForWin8/Audio/Audio_Realtek_Win8_64_Z6016716.zip'
             client_url=Start_split(url,self.sequence)
             #starting threads
             for i in range(self.sequence) :
