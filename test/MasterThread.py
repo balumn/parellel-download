@@ -49,20 +49,22 @@ class MasterThread(Thread):
                 #while True:   
                 part=recvall(self.sock)
                 #find offset
-                bt = str(self.byte)
-                temp=(bt.split('='))
-                temp1=(temp[1].split('-'))
-                temp2=temp1[0]
-                offset=int(temp2)
+                #bt = str(self.byte)
+                #temp=(bt.split('='))
+                #temp1=(temp[1].split('-'))
+                #temp2=temp1[0]
+                #offset=int(temp2)
 
-                print("startng pos to write data:",offset)
-                seekmer.replace(offset,part)
+                #print("startng pos to write data:",offset)
+                #seekmer.replace(offset,part)
                 
 
                     #print(part)
-                #downloadFolder = "C://Project/parellel-download"
-                #downloadPath = downloadFolder + "/" + "new_file"   
-                #f=open(downloadPath+str(self.sequence),"wb")
-                #f.write(part) 
-                #f.close()
+                downloadfolder = "c://project/parellel-download"
+                downloadpath = downloadfolder + "/" + "new_file"   
+                f=open(downloadpath+str(self.sequence),"wb")
+                print("data from client",self.sequence,"is received")
+                f.write(part)
+                print("data from client",self.sequence,"is written to file")
+                f.close()
                 #print(part)

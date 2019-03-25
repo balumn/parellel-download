@@ -10,8 +10,8 @@ def broadcast_recive():
         client.bind(('', 37020))
         while True:
             data, addr = client.recvfrom(1024)
-            print("received message: %s"%data)
-            print("recived from :",addr)
+            #print("received message: %s"%data)
+            print("recived from master :",addr)
             break;
         return addr
 def broadcast_send():
@@ -26,11 +26,11 @@ def broadcast_send():
         server.settimeout(0.02)
         server.bind(("", 44444))
         message = b"broadcast from server"
-        timeout = 20   # [seconds]
+        timeout = 30   # [seconds]
         timeout_start = time.time()
         while time.time() < timeout_start + timeout:
             server.sendto(message, ('<broadcast>', 37020))
-            print("message sent!")
+            print("brodcast message sent!")
             time.sleep(1)
             rtm.tcp_listen(tcpsock)
         if rtm.sequence != 0 :

@@ -3,6 +3,7 @@ import socket
 from MasterThread import MasterThread
 from SplitDownloader import * 
 import select
+import merge
 
 
 class recive_tcp_message:
@@ -22,9 +23,10 @@ class recive_tcp_message:
                     if s is tcpsock:
                         (conn, (ip,port)) = tcpsock.accept()
                         msg=conn.recv(self.BUFFER_SIZE)
-                        print(msg)
                         self.sequence = self.sequence+1
-                        print('Got connection from ', (ip,port))
+                        print(msg,self.sequence)
+                        
+                        print("Got connection from client ",self.sequence, (ip,port))
                         self.list_of_param.append([ip,port,conn,self.sequence])
                     else:
                         pass
@@ -37,7 +39,7 @@ class recive_tcp_message:
             #code to pass url here
             #@TODO get url from user
             #url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
-            url='https://a.tumblr.com/tumblr_mf1w5572Hm1rqcxjao1_r1.mp3'
+            url='http://s3.amazonaws.com/codesector-us/teracopy.exe'
             client_url=Start_split(url,self.sequence)
             #starting threads
             for i in range(self.sequence) :
@@ -49,4 +51,4 @@ class recive_tcp_message:
 
             for t in self.threads:
                 t.join()
-           # merge(self.sequence)
+            merge.merge(self.sequence)

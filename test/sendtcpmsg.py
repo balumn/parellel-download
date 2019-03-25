@@ -10,11 +10,12 @@ def send_tcp_message(tcpaddress):
         TCP_IP = tcpaddress
         TCP_PORT = 9001
         BUFFER_SIZE = 1024
-        msg="hello Sever i am client"
+        msg="Reporting Client "
         print(TCP_IP,TCP_PORT)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((TCP_IP,TCP_PORT))
         s.send(msg.encode())
+        print("tcp conn from client send to server!!!")
         #msg=s.recv(BUFFER_SIZE)
         #print (msg)
         url=s.recv(BUFFER_SIZE)
@@ -29,6 +30,7 @@ def send_tcp_message(tcpaddress):
         req = urllib.request.Request(url, headers={'Range':x})
         print("file downloading... plz wait")
         data = urllib.request.urlopen(req).read()
+        print("file download complete!!!")
         #data.encode()
         #@TODO assign directory path for download
 
@@ -36,13 +38,15 @@ def send_tcp_message(tcpaddress):
         downloadFolder = "C://Project/parellel-download"
         if not (os.path.isdir("C://Project/parellel-download")):
             os.makedirs("C://Project/parellel-download")
-        downloadPath = downloadFolder + "/" + "new_file"
+        downloadPath = downloadFolder + "/" + "temp_file"
         f=open(downloadPath,'wb')
+        print("data is downloded in client side and is abt to write...")
         
         
         #for chunk in data1:   #verify if nessary
         #        s.sendall(chunk.encode())
-        f.write(data) 
+        f.write(data)
+        print("data write completed at client side and waiting for server...")
         f.close()
         write_list=[s]
         with open(downloadPath,'rb') as f:
@@ -51,10 +55,10 @@ def send_tcp_message(tcpaddress):
             #    s.send(d)
             #    d=f.read(4096)
             #    print(d)
-            readable, writable, errored = select.select([],write_list, [])   
+            readable, writable, errored = select.select([],write_list, [])   #check if reciving socket is ready
             for i in writable:
                 if i is s:
-                    print("file about to send")
+                    print("file about to send..")
                     s.sendfile(f)   
         s.close()
         print("file send :::")
