@@ -5,6 +5,9 @@ import urllib.request
 import urllib.response
 import os
 import select
+from shutil import copyfileobj
+from urllib.error import HTTPError
+from urllib.error import URLError
 
 def send_tcp_message(tcpaddress):
         TCP_IP = tcpaddress
@@ -27,29 +30,78 @@ def send_tcp_message(tcpaddress):
 
         x=byte.decode()  #this variable might by named x as param to range                                                             #check if recived as string NOT byte
         url=url.decode()
-        req = urllib.request.Request(url, headers={'Range':x})
-        print("file downloading... plz wait")
-        data = urllib.request.urlopen(req).read()
-        print("file download complete!!!")
+        #req = urllib.request.Request(url, headers={'Range':x})
+        #print("file downloading... plz wait")
+        #data = urllib.request.urlopen(req).read()
+        #print("file download complete!!!")
         #data.encode()
         #@TODO assign directory path for download
-
-        #@TODO path :https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
-        downloadFolder = "C://Project/parellel-download"
+        downloadFolder = "C://Project/parellel-download/"
         if not (os.path.isdir("C://Project/parellel-download")):
-            os.makedirs("C://Project/parellel-download")
-        downloadPath = downloadFolder + "/" + "temp_file"
-        f=open(downloadPath,'wb')
-        print("data is downloded in client side and is abt to write...")
+            os.makedirs("C://Project/parellel-download/")
+        #downloadPath = downloadFolder + "/" + "temp_file"
+        #f=open(downloadPath,'wb')
+        #print("data is downloded in client side and is abt to write...")
         
         
         #for chunk in data1:   #verify if nessary
         #        s.sendall(chunk.encode())
-        f.write(data)
-        print("data write completed at client side and waiting for server...")
-        f.close()
+        #f.write(data)
+        #print("data write completed at client side and waiting for server...")
+        #f.close()
+        ###############
+
+        downloadname =str(url.split('/')[-1])#gives proper filename
+        downloadpath=downloadFolder+downloadname
+        print(downloadpath)
+        req = urllib.request.Request(url, headers={'Range':x})
+        #while remaining_download_tries > 0 :
+        print("starting download")
+        try:
+            print("file downloading try 1")
+            #raise HTTPError()
+            with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                copyfileobj(fsrc, fdst,16*1024)
+                print("file downloading complete in try 1")
+                #raise HTTPError()
+        except (HTTPError, URLError) as error:
+            print("file downloading failed ...1.. retrying...")
+            #2
+            try:
+                print("file downloading try 2")
+                with urllib.request.urlopen(inputValue) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                    copyfileobj(fsrc, fdst,16*1024)
+                    print("file downloading complete in try 2")
+            except (HTTPError, URLError) as error:
+                print("file downloading failed ...2.. retrying...")
+                #3
+                try:
+                    print("file downloading try 3")
+                    with urllib.request.urlopen(inputValue) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                        copyfileobj(fsrc, fdst,16*1024)
+                        print("file downloading complete in try 3")
+                except (HTTPError, URLError) as error:
+                    print("file downloading failed ...3.. aborting...")
+                    print("link expired or not found program is exiting")
+                
+                else:
+                    print("Complete in try3")
+                
+                #3
+            
+            else:
+                print("Complete in try2")
+            
+            #2
+        
+        else:
+            print("Complete in try1")
+        #1
+        ##################
+        #@TODO path :https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f
+        
         write_list=[s]
-        with open(downloadPath,'rb') as f:
+        with open(downloadpath,'rb') as f:
             #d=f.read(4096)
             #while d:
             #    s.send(d)
@@ -58,7 +110,7 @@ def send_tcp_message(tcpaddress):
             readable, writable, errored = select.select([],write_list, [])   #check if reciving socket is ready
             for i in writable:
                 if i is s:
-                    print("file about to send..")
+                    print("file sending.....")
                     s.sendfile(f)   
         s.close()
         print("file send :::")

@@ -3,12 +3,13 @@ import sys
 import shutil
 
 #i=recive_tcp_message.sequence
-def merge(seq):
+def merge(url,seq):
     i=1
     buffer_size=8192
+    downloadname =str(url.split('/')[-1])#gives proper filename
     downloadFolder = "c://project/parellel-download"
     downloadPath = downloadFolder + "/" + "new_file"
-    fdst=open(downloadFolder+"/"+"final","wb")
+    fdst=open(downloadFolder+"/"+downloadname,"wb")
     while(i<=seq):
         if (os.path.isfile(downloadPath+str(i))): 
             fsrc=open(downloadPath+str(i),"rb")

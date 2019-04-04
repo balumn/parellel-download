@@ -39,7 +39,7 @@ class recive_tcp_message:
             #code to pass url here
             #@TODO get url from user
             #url='https://www.w3.org/TR/PNG/iso_8859-1.txt'
-            url='https://dlcdnets.asus.com/pub/ASUS/nb/DriversForWin8/Audio/Audio_Realtek_Win8_64_Z6016716.zip'
+            url='https://www.codesector.com/files/teracopy.exe'
             client_url=Start_split(url,self.sequence)
             #starting threads
             for i in range(self.sequence) :
@@ -51,4 +51,4 @@ class recive_tcp_message:
 
             for t in self.threads:
                 t.join()
-            merge.merge(self.sequence)
+            merge.merge(url,self.sequence)
