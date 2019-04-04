@@ -8,6 +8,7 @@ import select
 from shutil import copyfileobj
 from urllib.error import HTTPError
 from urllib.error import URLError
+import time
 
 def send_tcp_message(tcpaddress):
         TCP_IP = tcpaddress
@@ -59,27 +60,37 @@ def send_tcp_message(tcpaddress):
         print("starting download")
         try:
             print("file downloading try 1")
+
             #raise HTTPError()
             with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                 copyfileobj(fsrc, fdst,16*1024)
                 print("file downloading complete in try 1")
+                fdst.close()
                 #raise HTTPError()
         except (HTTPError, URLError) as error:
             print("file downloading failed ...1.. retrying...")
+            print("retring in 5 seconds...")
+            time.sleep(5)
             #2
             try:
+                fdst.close()
                 print("file downloading try 2")
-                with urllib.request.urlopen(inputValue) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                     copyfileobj(fsrc, fdst,16*1024)
                     print("file downloading complete in try 2")
+                    fdst.close()
             except (HTTPError, URLError) as error:
                 print("file downloading failed ...2.. retrying...")
+                print("retring in 15 seconds...")
+                time.sleep(15)
                 #3
                 try:
+                    fdst.close()
                     print("file downloading try 3")
-                    with urllib.request.urlopen(inputValue) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                    with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                         copyfileobj(fsrc, fdst,16*1024)
                         print("file downloading complete in try 3")
+                        fdst.close()
                 except (HTTPError, URLError) as error:
                     print("file downloading failed ...3.. aborting...")
                     print("link expired or not found program is exiting")
