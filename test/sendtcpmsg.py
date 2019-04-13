@@ -62,7 +62,7 @@ def send_tcp_message(tcpaddress):
             print("file downloading try 1")
 
             #raise HTTPError()
-            with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+            with urllib.request.urlopen(req) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                 copyfileobj(fsrc, fdst,16*1024)
                 print("file downloading complete in try 1")
                 fdst.close()
@@ -75,7 +75,7 @@ def send_tcp_message(tcpaddress):
             try:
                 fdst.close()
                 print("file downloading try 2")
-                with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                with urllib.request.urlopen(req) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                     copyfileobj(fsrc, fdst,16*1024)
                     print("file downloading complete in try 2")
                     fdst.close()
@@ -87,7 +87,7 @@ def send_tcp_message(tcpaddress):
                 try:
                     fdst.close()
                     print("file downloading try 3")
-                    with urllib.request.urlopen(url) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
+                    with urllib.request.urlopen(req) as fsrc,open(downloadpath,'w+b')as fdst: #NamedTemporaryFile(delete=False) replace open () with Named..() for temp file download
                         copyfileobj(fsrc, fdst,16*1024)
                         print("file downloading complete in try 3")
                         fdst.close()
