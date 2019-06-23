@@ -1,2 +1,9 @@
 .vs
 .vscode
+1
+2
+3
+teracopy.exe
+*.exe
+__pycache__/
+C:/__pycache__/*
